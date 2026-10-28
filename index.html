@@ -69,14 +69,14 @@
       justify-content: center;
       text-align: center;
       opacity: 0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      transform: translateY(12px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(10px);
     }
 
     .screen.active {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0);
+      display: flex !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
 
     /* 1. 표지 화면 */
@@ -126,6 +126,11 @@
       box-shadow: 0 0 20px rgba(245, 208, 97, 0.25);
       transition: all 0.3s ease;
       animation: pulseBtn 2.2s infinite;
+      touch-action: manipulation;
+    }
+
+    .btn-start:active {
+      transform: scale(0.97);
     }
 
     @keyframes pulseBtn {
@@ -156,19 +161,20 @@
 
     .tarot-card-spread {
       position: absolute;
-      width: 72px;
-      height: 125px;
+      width: 70px;
+      height: 122px;
       border-radius: 8px;
       background: radial-gradient(circle, #1a1e3a 0%, #0d0f1e 100%);
       border: 1.5px solid rgba(245, 208, 97, 0.4);
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
       cursor: pointer;
       transform-origin: center 290px;
-      transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.2s ease;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 6px;
+      touch-action: manipulation;
     }
 
     .tarot-card-spread .card-inner-pattern {
@@ -183,7 +189,7 @@
       pointer-events: none;
     }
 
-    .tarot-card-spread:hover, .tarot-card-spread:active {
+    .tarot-card-spread:active {
       z-index: 100 !important;
       border-color: var(--gold-primary);
       box-shadow: 0 0 20px rgba(245, 208, 97, 0.7);
@@ -202,7 +208,7 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 1s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
       border-radius: 10px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
@@ -316,6 +322,7 @@
       font-weight: 600;
       transition: all 0.2s ease;
       width: 100%;
+      touch-action: manipulation;
     }
 
     .btn-action.primary {
@@ -432,18 +439,6 @@
       font-size: 0.78rem;
       color: var(--gold-light);
     }
-
-    /* 화면 너비 380px 이하 초소형 화면(카톡 웹뷰) 전용 */
-    @media (max-width: 380px) {
-      .deck-wrapper {
-        height: 270px !important;
-      }
-      .tarot-card-spread {
-        width: 64px !important;
-        height: 112px !important;
-        transform-origin: center 250px !important;
-      }
-    }
   </style>
 </head>
 <body>
@@ -466,7 +461,7 @@
       </svg>
       <h1 class="brand-title">정후이 타로</h1>
       <p class="brand-sub">행운을 점쳐보세요</p>
-      <button class="btn-start" onclick="goToSpread()">화면을 터치하여 카드 펼치기</button>
+      <button class="btn-start" id="mainStartBtn" type="button">화면을 터치하여 카드 펼치기</button>
     </div>
 
     <!-- 2단계: 카드 펼침 & 선택 화면 -->
@@ -499,8 +494,8 @@
       </div>
 
       <div class="btn-group">
-        <button class="btn-action primary" onclick="goToHoroscope()">✨ 나의 생일 & 별자리 운세 확인하기</button>
-        <button class="btn-action" onclick="resetToCover()">처음으로 돌아가기</button>
+        <button class="btn-action primary" id="btnGoHoroscope" type="button">✨ 나의 생일 & 별자리 운세 확인하기</button>
+        <button class="btn-action" id="btnReset1" type="button">처음으로 돌아가기</button>
       </div>
     </div>
 
@@ -514,7 +509,7 @@
       <div class="input-card">
         <p style="font-size:0.85rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
         <div class="input-row">
-          <select class="select-input" id="zodiacSelect" onchange="calculateHoroscopeBySelect()">
+          <select class="select-input" id="zodiacSelect">
             <option value="" disabled selected>별자리로 직접 선택</option>
             <option value="0">♈ 양자리 (03.21~04.19)</option>
             <option value="1">♉ 황소자리 (04.20~05.20)</option>
@@ -529,7 +524,7 @@
             <option value="10">♒ 물병자리 (01.20~02.18)</option>
             <option value="11">♓ 물고기자리 (02.19~03.20)</option>
           </select>
-          <input type="date" class="date-input" id="birthdayInput" onchange="calculateHoroscopeByBirth()">
+          <input type="date" class="date-input" id="birthdayInput">
         </div>
       </div>
 
@@ -559,7 +554,7 @@
       </div>
 
       <div class="btn-group">
-        <button class="btn-action" onclick="resetToCover()">처음으로 돌아가기 (다시 점치기)</button>
+        <button class="btn-action" id="btnReset2" type="button">처음으로 돌아가기 (다시 점치기)</button>
       </div>
     </div>
 
@@ -574,7 +569,7 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      stars = Array.from({ length: 50 }, () => ({
+      stars = Array.from({ length: 45 }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.2 + 0.4,
@@ -599,44 +594,65 @@
     resizeCanvas();
     animateStars();
 
-    /* 2. Web Audio 효과음 */
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    /* 2. 안전한 Web Audio 효과음 (에러 발생 시에도 무시하고 화면 동작) */
+    let audioCtx = null;
+
+    function getAudioContext() {
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) audioCtx = new AudioContextClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch (e) {
+        // 오디오 미지원 환경 방어
+      }
+      return audioCtx;
+    }
 
     function playCardShuffleSound() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(140 + Math.random() * 120, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.07);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.07);
-        }, i * 35);
-      }
+      try {
+        const actx = getAudioContext();
+        if (!actx) return;
+        for (let i = 0; i < 4; i++) {
+          setTimeout(() => {
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(140 + Math.random() * 100, actx.currentTime);
+            gain.gain.setValueAtTime(0.02, actx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.06);
+            osc.connect(gain);
+            gain.connect(actx.destination);
+            osc.start();
+            osc.stop(actx.currentTime + 0.06);
+          }, i * 35);
+        }
+      } catch (e) {}
     }
 
     function playChimeSound() {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((freq, idx) => {
-        setTimeout(() => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.1);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 1.1);
-        }, idx * 100);
-      });
+      try {
+        const actx = getAudioContext();
+        if (!actx) return;
+        const notes = [523.25, 659.25, 783.99];
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, actx.currentTime);
+            gain.gain.setValueAtTime(0.05, actx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.9);
+            osc.connect(gain);
+            gain.connect(actx.destination);
+            osc.start();
+            osc.stop(actx.currentTime + 0.9);
+          }, idx * 100);
+        });
+      } catch (e) {}
     }
 
     /* 3. 메이저 타로 22장 데이터 */
@@ -662,14 +678,16 @@
       { num: "XVIII", nameKr: "달", nameEn: "The Moon", icon: "🌙", fortune: "안갯속을 걷는 듯 감정이 요동치고 불안이 생길 수 있습니다. 착각이나 오해에 주의하세요.", advice: "실체 없는 불안에 휩쓸리지 마세요. 날이 밝고 안개가 걷힐 때까지 중요한 결정을 미루는 것이 좋습니다." },
       { num: "XIX", nameKr: "태양", nameEn: "The Sun", icon: "☀️", fortune: "생명력과 활력이 넘치는 최고의 행운의 날입니다. 어둠이 걷히고 모든 것이 명쾌하고 찬란해집니다.", advice: "밝은 미소로 에너지를 마음껏 발산하세요. 당신의 긍정적인 기운이 주변 사람들까지 행복하게 만듭니다." },
       { num: "XX", nameKr: "심판", nameEn: "Judgement", icon: "🎺", fortune: "오랫동안 기다려온 소식이나 명확한 응답이 도착합니다. 부활과 회복, 새로운 깨어남의 순간입니다.", advice: "과거의 후회를 용서하고 부름에 당당히 응하세요. 이제 새로운 삶의 단계로 도약할 때입니다." },
-      { num: "XXI", nameKr: "세계", nameEn: "The World", icon: "🌐", fortune: "완성과 통합, 하나의 아름다운 주기가 성공적으로 마무리되는 날입니다. 충만한 성취감을 누립니다." advice: "지금까지 달려온 자신을 마음껏 칭찬해 주세요. 완성을 축하하고 더 넓은 세상을 향해 나아가세요." }
+      { num: "XXI", nameKr: "세계", nameEn: "The World", icon: "🌐", fortune: "완성과 통합, 하나의 아름다운 주기가 성공적으로 마무리되는 날입니다. 충만한 성취감을 누립니다.", advice: "지금까지 달려온 자신을 마음껏 칭찬해 주세요. 완성을 축하하고 더 넓은 세상을 향해 나아가세요." }
     ];
 
-    /* 4. 카톡 인앱 브라우저 화면 폭 자동 계산 펼침 로직 */
+    /* 4. 화면 전환 및 이벤트 등록 */
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(id);
-      target.classList.add('active');
+      if (target) {
+        target.classList.add('active');
+      }
     }
 
     function goToSpread() {
@@ -683,11 +701,8 @@
       wrapper.innerHTML = '';
       
       const shuffledIndices = Array.from({ length: 22 }, (_, i) => i).sort(() => Math.random() - 0.5);
-      
-      // 실제 사용 가능한 너비 실시간 측정
       const clientWidth = document.documentElement.clientWidth || window.innerWidth;
       
-      // 화면 너비에 따라 카드가 양끝 10px 여유를 두고 화면 안에 100% 들어오도록 동적 계산
       let totalCards = 9;
       let xStep = 7.5;
       let angleStep = 2.0;
@@ -720,7 +735,8 @@
         `;
 
         const cardDataIndex = shuffledIndices[i % 22];
-        cardEl.addEventListener('click', () => pickCard(cardDataIndex, cardEl));
+        const onPick = () => pickCard(cardDataIndex, cardEl);
+        cardEl.addEventListener('click', onPick);
         wrapper.appendChild(cardEl);
       }
     }
@@ -733,7 +749,7 @@
       setTimeout(() => {
         showScreen('screenResult');
         displayResult(tarotDeck[cardIndex]);
-      }, 400);
+      }, 350);
     }
 
     function displayResult(card) {
@@ -757,7 +773,7 @@
       showScreen('screenCover');
     }
 
-    /* 5. 생일 & 별자리 운세 */
+    /* 5. 별자리 & 생일 운세 */
     const zodiacData = [
       { name: "양자리", date: "03.21 ~ 04.19", icon: "♈" },
       { name: "황소자리", date: "04.20 ~ 05.20", icon: "♉" },
@@ -873,6 +889,16 @@
       document.getElementById('horoscopeResult').style.display = 'block';
       playChimeSound();
     }
+
+    /* 6. 모바일 안전 이벤트 리스너 바인딩 */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('mainStartBtn').addEventListener('click', goToSpread);
+      document.getElementById('btnGoHoroscope').addEventListener('click', goToHoroscope);
+      document.getElementById('btnReset1').addEventListener('click', resetToCover);
+      document.getElementById('btnReset2').addEventListener('click', resetToCover);
+      document.getElementById('zodiacSelect').addEventListener('change', calculateHoroscopeBySelect);
+      document.getElementById('birthdayInput').addEventListener('change', calculateHoroscopeByBirth);
+    });
   </script>
 </body>
 </html>
