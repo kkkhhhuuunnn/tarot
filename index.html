@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>정후이 타로 - 행운을 점쳐보세요</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,6 @@
       --gold-dark: #b8860b;
       --text-main: #f0f3fa;
       --text-muted: #9aa2ba;
-      --card-back-bg: #14172e;
     }
 
     * {
@@ -31,13 +30,13 @@
       color: var(--text-main);
       font-family: 'Noto Serif KR', serif;
       min-height: 100vh;
+      min-height: -webkit-fill-available;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
     }
 
-    /* 배경 별빛 */
     .stars-canvas {
       position: fixed;
       top: 0;
@@ -52,14 +51,14 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 600px;
+      max-width: 520px;
       margin: 0 auto;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 24px 16px;
+      padding: 20px 14px;
     }
 
     .screen {
@@ -70,8 +69,8 @@
       justify-content: center;
       text-align: center;
       opacity: 0;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      transform: translateY(15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(12px);
     }
 
     .screen.active {
@@ -82,35 +81,35 @@
 
     /* 1. 표지 화면 */
     .cover-moon {
-      width: 90px;
-      height: 90px;
-      margin-bottom: 24px;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
       filter: drop-shadow(0 0 25px rgba(245, 208, 97, 0.45));
       animation: floatMoon 4s ease-in-out infinite;
     }
 
     @keyframes floatMoon {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(4deg); }
+      50% { transform: translateY(-6px) rotate(3deg); }
     }
 
     .brand-title {
       font-family: 'Cinzel', 'Noto Serif KR', serif;
-      font-size: 2.6rem;
+      font-size: 2.2rem;
       font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       background: linear-gradient(135deg, #fff 20%, var(--gold-light) 60%, var(--gold-primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .brand-sub {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--gold-primary);
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       font-weight: 400;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       text-shadow: 0 0 12px rgba(245, 208, 97, 0.3);
     }
 
@@ -118,8 +117,8 @@
       background: linear-gradient(135deg, rgba(245, 208, 97, 0.15), rgba(184, 134, 11, 0.25));
       border: 1px solid var(--gold-primary);
       color: var(--gold-light);
-      padding: 16px 36px;
-      font-size: 1.05rem;
+      padding: 15px 32px;
+      font-size: 1rem;
       font-weight: 600;
       font-family: inherit;
       border-radius: 40px;
@@ -129,60 +128,54 @@
       animation: pulseBtn 2.2s infinite;
     }
 
-    .btn-start:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(245, 208, 97, 0.45);
-      background: linear-gradient(135deg, rgba(245, 208, 97, 0.3), rgba(184, 134, 11, 0.4));
-    }
-
     @keyframes pulseBtn {
       0%, 100% { box-shadow: 0 0 15px rgba(245, 208, 97, 0.2); }
-      50% { box-shadow: 0 0 28px rgba(245, 208, 97, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(245, 208, 97, 0.5); }
     }
 
     /* 2. 카드 펼침 화면 */
     .deck-instruction {
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--gold-light);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       letter-spacing: 1px;
-      text-shadow: 0 0 15px rgba(245, 208, 97, 0.4);
+      text-shadow: 0 0 12px rgba(245, 208, 97, 0.4);
     }
 
     .deck-wrapper {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 310px;
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1200px;
+      perspective: 1000px;
       overflow: visible;
     }
 
     .tarot-card-spread {
       position: absolute;
-      width: 105px;
-      height: 180px;
-      border-radius: 10px;
+      width: 72px;
+      height: 125px;
+      border-radius: 8px;
       background: radial-gradient(circle, #1a1e3a 0%, #0d0f1e 100%);
       border: 1.5px solid rgba(245, 208, 97, 0.4);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
       cursor: pointer;
-      transform-origin: center 400px;
-      transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.3s ease, border-color 0.3s ease;
+      transform-origin: center 290px;
+      transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.25s ease, border-color 0.25s ease;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px;
+      padding: 6px;
     }
 
     .tarot-card-spread .card-inner-pattern {
       width: 100%;
       height: 100%;
       border: 1px dashed rgba(245, 208, 97, 0.35);
-      border-radius: 6px;
+      border-radius: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -190,18 +183,18 @@
       pointer-events: none;
     }
 
-    .tarot-card-spread:hover {
+    .tarot-card-spread:hover, .tarot-card-spread:active {
       z-index: 100 !important;
       border-color: var(--gold-primary);
-      box-shadow: 0 0 25px rgba(245, 208, 97, 0.7);
+      box-shadow: 0 0 20px rgba(245, 208, 97, 0.7);
     }
 
     /* 3. 타로 결과 화면 */
     .result-card-container {
       perspective: 1000px;
-      width: 170px;
-      height: 290px;
-      margin: 0 auto 20px;
+      width: 145px;
+      height: 250px;
+      margin: 0 auto 18px;
     }
 
     .result-card-3d {
@@ -210,8 +203,8 @@
       position: relative;
       transform-style: preserve-3d;
       transition: transform 1s cubic-bezier(0.4, 0.2, 0.2, 1);
-      border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
     .result-card-3d.flipped {
@@ -223,12 +216,12 @@
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 12px;
     }
 
     .card-face.back {
@@ -240,33 +233,33 @@
       background: linear-gradient(160deg, #181b36 0%, #0b0d1a 100%);
       border: 2px solid var(--gold-primary);
       transform: rotateY(180deg);
-      box-shadow: 0 0 30px rgba(245, 208, 97, 0.3);
+      box-shadow: 0 0 25px rgba(245, 208, 97, 0.3);
     }
 
     .card-number {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: var(--gold-primary);
       letter-spacing: 2px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .card-icon {
-      font-size: 3.5rem;
-      margin: 10px 0;
-      filter: drop-shadow(0 0 12px rgba(245, 208, 97, 0.4));
+      font-size: 3.2rem;
+      margin: 8px 0;
+      filter: drop-shadow(0 0 10px rgba(245, 208, 97, 0.4));
     }
 
     .card-title-kr {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .card-title-en {
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--gold-light);
       letter-spacing: 1px;
     }
@@ -274,29 +267,29 @@
     .reading-box {
       background: rgba(20, 23, 46, 0.75);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 18px;
       text-align: left;
       width: 100%;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
     }
 
     .reading-section-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--gold-primary);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .reading-text {
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.92rem;
+      line-height: 1.65;
       color: #e2e7f5;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       word-break: keep-all;
     }
 
@@ -307,7 +300,7 @@
     .btn-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
     }
 
@@ -315,13 +308,13 @@
       background: rgba(245, 208, 97, 0.12);
       border: 1px solid var(--gold-primary);
       color: var(--gold-light);
-      padding: 14px 20px;
-      font-size: 0.95rem;
+      padding: 13px 18px;
+      font-size: 0.92rem;
       font-family: inherit;
       border-radius: 30px;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       width: 100%;
     }
 
@@ -330,29 +323,24 @@
       box-shadow: 0 0 15px rgba(245, 208, 97, 0.25);
     }
 
-    .btn-action:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(245, 208, 97, 0.4);
-    }
-
-    /* 4. 별자리 & 생일 운세 화면 */
+    /* 4. 별자리 & 생일 운세 */
     .horoscope-header {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .horoscope-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--gold-light);
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .horoscope-date-badge {
       display: inline-block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--gold-primary);
       border: 1px solid rgba(245, 208, 97, 0.4);
-      padding: 4px 14px;
+      padding: 3px 12px;
       border-radius: 20px;
       background: rgba(245, 208, 97, 0.08);
     }
@@ -360,17 +348,17 @@
     .input-card {
       background: rgba(20, 23, 46, 0.8);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 14px;
       width: 100%;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .input-row {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 8px;
+      margin-top: 10px;
       width: 100%;
     }
 
@@ -378,56 +366,52 @@
       background: #0d0f1e;
       border: 1px solid rgba(245, 208, 97, 0.4);
       color: #fff;
-      padding: 11px 14px;
+      padding: 10px 12px;
       border-radius: 8px;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       outline: none;
       width: 100%;
-    }
-
-    .date-input:focus, .select-input:focus {
-      border-color: var(--gold-primary);
     }
 
     .horoscope-result-card {
       display: none;
       background: rgba(20, 23, 46, 0.85);
       border: 1.5px solid var(--gold-primary);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 14px;
+      padding: 18px;
       width: 100%;
       text-align: left;
-      margin-bottom: 18px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-      animation: fadeIn 0.5s ease forwards;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.4s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .zodiac-badge {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       border-bottom: 1px solid rgba(245, 208, 97, 0.2);
-      padding-bottom: 12px;
-      margin-bottom: 14px;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .zodiac-icon {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
 
     .zodiac-info h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #fff;
     }
 
     .zodiac-info p {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--gold-primary);
     }
 
@@ -435,44 +419,29 @@
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      margin-top: 14px;
-      padding-top: 12px;
+      margin-top: 12px;
+      padding-top: 10px;
       border-top: 1px dashed rgba(245, 208, 97, 0.2);
     }
 
     .lucky-chip {
       background: rgba(245, 208, 97, 0.1);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      padding: 5px 10px;
+      padding: 4px 9px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gold-light);
     }
 
-    /* 모바일 반응형 화면 최적화 */
-    @media (max-width: 480px) {
-      .brand-title {
-        font-size: 2.1rem !important;
-        letter-spacing: 2px !important;
-      }
-      .brand-sub {
-        font-size: 1.1rem !important;
-      }
-      .deck-instruction {
-        font-size: 1.15rem !important;
-      }
+    /* 화면 너비 380px 이하 초소형 화면(카톡 웹뷰) 전용 */
+    @media (max-width: 380px) {
       .deck-wrapper {
-        height: 320px !important;
+        height: 270px !important;
       }
       .tarot-card-spread {
-        width: 76px !important;
-        height: 132px !important;
-        border-radius: 8px !important;
-        transform-origin: center 320px !important;
-      }
-      .result-card-container {
-        width: 150px !important;
-        height: 255px !important;
+        width: 64px !important;
+        height: 112px !important;
+        transform-origin: center 250px !important;
       }
     }
   </style>
@@ -511,11 +480,11 @@
       <div class="result-card-container">
         <div class="result-card-3d" id="resultCard3D">
           <div class="card-face back">
-            <div style="font-size:2.2rem; color:var(--gold-primary);">✦</div>
+            <div style="font-size:1.8rem; color:var(--gold-primary);">✦</div>
           </div>
           <div class="card-face front" id="cardFrontFace">
             <div class="card-number" id="resCardNum">THE FOOL</div>
-            <div class="card-icon" id="resCardIcon">🃏</div>
+            <div class="card-icon" id="resCardIcon">🎒</div>
             <div class="card-title-kr" id="resCardTitleKr">바보</div>
             <div class="card-title-en" id="resCardTitleEn">The Fool</div>
           </div>
@@ -535,7 +504,7 @@
       </div>
     </div>
 
-    <!-- 4단계: 생일 & 별자리 운세 (매일 변경) -->
+    <!-- 4단계: 생일 & 별자리 운세 -->
     <div class="screen" id="screenHoroscope">
       <div class="horoscope-header">
         <h2 class="horoscope-title">오늘의 별자리 운세</h2>
@@ -543,7 +512,7 @@
       </div>
 
       <div class="input-card">
-        <p style="font-size:0.9rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
+        <p style="font-size:0.85rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
         <div class="input-row">
           <select class="select-input" id="zodiacSelect" onchange="calculateHoroscopeBySelect()">
             <option value="" disabled selected>별자리로 직접 선택</option>
@@ -597,7 +566,7 @@
   </div>
 
   <script>
-    /* 1. 배경 별빛 렌더링 */
+    /* 1. 배경 별빛 */
     const canvas = document.getElementById('starsCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -605,10 +574,10 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      stars = Array.from({ length: 65 }, () => ({
+      stars = Array.from({ length: 50 }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 1.3 + 0.4,
+        radius: Math.random() * 1.2 + 0.4,
         alpha: Math.random() * 0.7 + 0.3,
         speed: Math.random() * 0.015 + 0.005
       }));
@@ -630,23 +599,23 @@
     resizeCanvas();
     animateStars();
 
-    /* 2. Web Audio 효과음 (카드 촤르륵, 플립 종소리) */
+    /* 2. Web Audio 효과음 */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playCardShuffleSound() {
       if (audioCtx.state === 'suspended') audioCtx.resume();
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 5; i++) {
         setTimeout(() => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(140 + Math.random() * 120, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.07);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
           osc.start();
-          osc.stop(audioCtx.currentTime + 0.08);
+          osc.stop(audioCtx.currentTime + 0.07);
         }, i * 35);
       }
     }
@@ -660,13 +629,13 @@
           const gain = audioCtx.createGain();
           osc.type = 'sine';
           osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+          gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.1);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
           osc.start();
-          osc.stop(audioCtx.currentTime + 1.2);
-        }, idx * 110);
+          osc.stop(audioCtx.currentTime + 1.1);
+        }, idx * 100);
       });
     }
 
@@ -693,10 +662,10 @@
       { num: "XVIII", nameKr: "달", nameEn: "The Moon", icon: "🌙", fortune: "안갯속을 걷는 듯 감정이 요동치고 불안이 생길 수 있습니다. 착각이나 오해에 주의하세요.", advice: "실체 없는 불안에 휩쓸리지 마세요. 날이 밝고 안개가 걷힐 때까지 중요한 결정을 미루는 것이 좋습니다." },
       { num: "XIX", nameKr: "태양", nameEn: "The Sun", icon: "☀️", fortune: "생명력과 활력이 넘치는 최고의 행운의 날입니다. 어둠이 걷히고 모든 것이 명쾌하고 찬란해집니다.", advice: "밝은 미소로 에너지를 마음껏 발산하세요. 당신의 긍정적인 기운이 주변 사람들까지 행복하게 만듭니다." },
       { num: "XX", nameKr: "심판", nameEn: "Judgement", icon: "🎺", fortune: "오랫동안 기다려온 소식이나 명확한 응답이 도착합니다. 부활과 회복, 새로운 깨어남의 순간입니다.", advice: "과거의 후회를 용서하고 부름에 당당히 응하세요. 이제 새로운 삶의 단계로 도약할 때입니다." },
-      { num: "XXI", nameKr: "세계", nameEn: "The World", icon: "🌐", fortune: "완성과 통합, 하나의 아름다운 주기가 성공적으로 마무리되는 날입니다. 충만한 성취감을 누립니다.", advice: "지금까지 달려온 자신을 마음껏 칭찬해 주세요. 완성을 축하하고 더 넓은 세상을 향해 나아가세요." }
+      { num: "XXI", nameKr: "세계", nameEn: "The World", icon: "🌐", fortune: "완성과 통합, 하나의 아름다운 주기가 성공적으로 마무리되는 날입니다. 충만한 성취감을 누립니다." advice: "지금까지 달려온 자신을 마음껏 칭찬해 주세요. 완성을 축하하고 더 넓은 세상을 향해 나아가세요." }
     ];
 
-    /* 4. 화면 전환 및 카드 펼침 로직 (모바일 최적화) */
+    /* 4. 카톡 인앱 브라우저 화면 폭 자동 계산 펼침 로직 */
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(id);
@@ -715,16 +684,28 @@
       
       const shuffledIndices = Array.from({ length: 22 }, (_, i) => i).sort(() => Math.random() - 0.5);
       
-      // 모바일(화면 폭 480px 이하)에서는 카드 수와 간격을 좁혀 화면 밖 잘림 방지
-      const isMobile = window.innerWidth <= 480;
-      const totalCards = isMobile ? 11 : 17;
+      // 실제 사용 가능한 너비 실시간 측정
+      const clientWidth = document.documentElement.clientWidth || window.innerWidth;
+      
+      // 화면 너비에 따라 카드가 양끝 10px 여유를 두고 화면 안에 100% 들어오도록 동적 계산
+      let totalCards = 9;
+      let xStep = 7.5;
+      let angleStep = 2.0;
+
+      if (clientWidth > 420) {
+        totalCards = 11;
+        xStep = 10;
+        angleStep = 2.4;
+      }
+      if (clientWidth > 600) {
+        totalCards = 15;
+        xStep = 14;
+        angleStep = 3.4;
+      }
 
       for (let i = 0; i < totalCards; i++) {
         const cardEl = document.createElement('div');
         cardEl.className = 'tarot-card-spread';
-        
-        const angleStep = isMobile ? 2.5 : 4.2;
-        const xStep = isMobile ? 9 : 16;
         
         const angle = (i - (totalCards - 1) / 2) * angleStep;
         const xOffset = (i - (totalCards - 1) / 2) * xStep;
@@ -734,7 +715,7 @@
 
         cardEl.innerHTML = `
           <div class="card-inner-pattern">
-            <span style="font-size:1rem; color:rgba(245,208,97,0.7);">✦</span>
+            <span style="font-size:0.9rem; color:rgba(245,208,97,0.7);">✦</span>
           </div>
         `;
 
@@ -745,14 +726,14 @@
     }
 
     function pickCard(cardIndex, cardEl) {
-      cardEl.style.transform += ' translateY(-50px) scale(1.12)';
+      cardEl.style.transform += ' translateY(-45px) scale(1.12)';
       cardEl.style.borderColor = '#fff';
       playCardShuffleSound();
 
       setTimeout(() => {
         showScreen('screenResult');
         displayResult(tarotDeck[cardIndex]);
-      }, 450);
+      }, 400);
     }
 
     function displayResult(card) {
@@ -769,14 +750,14 @@
       setTimeout(() => {
         resultCard.classList.add('flipped');
         playChimeSound();
-      }, 300);
+      }, 250);
     }
 
     function resetToCover() {
       showScreen('screenCover');
     }
 
-    /* 5. 생일 & 별자리 운세 로직 (매일 자정 갱신) */
+    /* 5. 생일 & 별자리 운세 */
     const zodiacData = [
       { name: "양자리", date: "03.21 ~ 04.19", icon: "♈" },
       { name: "황소자리", date: "04.20 ~ 05.20", icon: "♉" },
