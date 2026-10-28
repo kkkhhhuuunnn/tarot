@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>정후이 타로 - 행운을 점쳐보세요</title>
+  <title>정후이 코드 - 행운을 점쳐보세요</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Noto+Serif+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 24px 20px;
+      padding: 24px 16px;
     }
 
     .screen {
@@ -145,7 +145,7 @@
       font-size: 1.35rem;
       font-weight: 600;
       color: var(--gold-light);
-      margin-bottom: 30px;
+      margin-bottom: 24px;
       letter-spacing: 1px;
       text-shadow: 0 0 15px rgba(245, 208, 97, 0.4);
     }
@@ -158,12 +158,13 @@
       justify-content: center;
       align-items: center;
       perspective: 1200px;
+      overflow: visible;
     }
 
     .tarot-card-spread {
       position: absolute;
-      width: 110px;
-      height: 190px;
+      width: 105px;
+      height: 180px;
       border-radius: 10px;
       background: radial-gradient(circle, #1a1e3a 0%, #0d0f1e 100%);
       border: 1.5px solid rgba(245, 208, 97, 0.4);
@@ -198,9 +199,9 @@
     /* 3. 타로 결과 화면 */
     .result-card-container {
       perspective: 1000px;
-      width: 180px;
-      height: 310px;
-      margin: 0 auto 24px;
+      width: 170px;
+      height: 290px;
+      margin: 0 auto 20px;
     }
 
     .result-card-3d {
@@ -251,13 +252,13 @@
     }
 
     .card-icon {
-      font-size: 3.8rem;
-      margin: 12px 0;
+      font-size: 3.5rem;
+      margin: 10px 0;
       filter: drop-shadow(0 0 12px rgba(245, 208, 97, 0.4));
     }
 
     .card-title-kr {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
       margin-bottom: 4px;
@@ -271,11 +272,11 @@
     }
 
     .reading-box {
-      background: rgba(20, 23, 46, 0.7);
+      background: rgba(20, 23, 46, 0.75);
       border: 1px solid rgba(245, 208, 97, 0.3);
       border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 24px;
+      padding: 20px;
+      margin-bottom: 20px;
       text-align: left;
       width: 100%;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
@@ -292,7 +293,7 @@
     }
 
     .reading-text {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       line-height: 1.7;
       color: #e2e7f5;
       margin-bottom: 16px;
@@ -314,8 +315,8 @@
       background: rgba(245, 208, 97, 0.12);
       border: 1px solid var(--gold-primary);
       color: var(--gold-light);
-      padding: 14px 24px;
-      font-size: 0.98rem;
+      padding: 14px 20px;
+      font-size: 0.95rem;
       font-family: inherit;
       border-radius: 30px;
       cursor: pointer;
@@ -336,11 +337,11 @@
 
     /* 4. 별자리 & 생일 운세 화면 */
     .horoscope-header {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .horoscope-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--gold-light);
       font-weight: 700;
       margin-bottom: 6px;
@@ -360,27 +361,29 @@
       background: rgba(20, 23, 46, 0.8);
       border: 1px solid rgba(245, 208, 97, 0.3);
       border-radius: 14px;
-      padding: 18px;
+      padding: 16px;
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .input-row {
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      justify-content: center;
-      margin-top: 10px;
+      margin-top: 12px;
+      width: 100%;
     }
 
     .date-input, .select-input {
       background: #0d0f1e;
       border: 1px solid rgba(245, 208, 97, 0.4);
       color: #fff;
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 8px;
       font-family: inherit;
       font-size: 0.95rem;
       outline: none;
+      width: 100%;
     }
 
     .date-input:focus, .select-input:focus {
@@ -392,10 +395,10 @@
       background: rgba(20, 23, 46, 0.85);
       border: 1.5px solid var(--gold-primary);
       border-radius: 16px;
-      padding: 22px;
+      padding: 20px;
       width: 100%;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       animation: fadeIn 0.5s ease forwards;
     }
@@ -410,40 +413,67 @@
       align-items: center;
       gap: 12px;
       border-bottom: 1px solid rgba(245, 208, 97, 0.2);
-      padding-bottom: 14px;
-      margin-bottom: 16px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .zodiac-icon {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
     }
 
     .zodiac-info h3 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #fff;
     }
 
     .zodiac-info p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gold-primary);
     }
 
     .lucky-chips {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-top: 16px;
-      padding-top: 14px;
+      margin-top: 14px;
+      padding-top: 12px;
       border-top: 1px dashed rgba(245, 208, 97, 0.2);
     }
 
     .lucky-chip {
       background: rgba(245, 208, 97, 0.1);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 20px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--gold-light);
+    }
+
+    /* 모바일 반응형 화면 최적화 */
+    @media (max-width: 480px) {
+      .brand-title {
+        font-size: 2.1rem !important;
+        letter-spacing: 2px !important;
+      }
+      .brand-sub {
+        font-size: 1.1rem !important;
+      }
+      .deck-instruction {
+        font-size: 1.15rem !important;
+      }
+      .deck-wrapper {
+        height: 320px !important;
+      }
+      .tarot-card-spread {
+        width: 76px !important;
+        height: 132px !important;
+        border-radius: 8px !important;
+        transform-origin: center 320px !important;
+      }
+      .result-card-container {
+        width: 150px !important;
+        height: 255px !important;
+      }
     }
   </style>
 </head>
@@ -465,7 +495,7 @@
           </linearGradient>
         </defs>
       </svg>
-      <h1 class="brand-title">정후이 타로</h1>
+      <h1 class="brand-title">정후이 코드</h1>
       <p class="brand-sub">행운을 점쳐보세요</p>
       <button class="btn-start" onclick="goToSpread()">화면을 터치하여 카드 펼치기</button>
     </div>
@@ -516,7 +546,7 @@
         <p style="font-size:0.9rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
         <div class="input-row">
           <select class="select-input" id="zodiacSelect" onchange="calculateHoroscopeBySelect()">
-            <option value="" disabled selected>별자리 선택</option>
+            <option value="" disabled selected>별자리로 직접 선택</option>
             <option value="0">♈ 양자리 (03.21~04.19)</option>
             <option value="1">♉ 황소자리 (04.20~05.20)</option>
             <option value="2">♊ 쌍둥이자리 (05.21~06.21)</option>
@@ -554,7 +584,7 @@
 
         <div class="lucky-chips">
           <div class="lucky-chip" id="luckyColor">행운의 색: 골드</div>
-          <div class="lucky-chip" id="luckyNum">행운의 숫자: 7</div>
+          <div class="lucky-chip" id="luckyNum">행운의 수: 7</div>
           <div class="lucky-chip" id="luckyTime">행운의 시간: 14:00</div>
         </div>
       </div>
@@ -605,7 +635,7 @@
 
     function playCardShuffleSound() {
       if (audioCtx.state === 'suspended') audioCtx.resume();
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 6; i++) {
         setTimeout(() => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
@@ -617,7 +647,7 @@
           gain.connect(audioCtx.destination);
           osc.start();
           osc.stop(audioCtx.currentTime + 0.08);
-        }, i * 40);
+        }, i * 35);
       }
     }
 
@@ -666,7 +696,7 @@
       { num: "XXI", nameKr: "세계", nameEn: "The World", icon: "🌐", fortune: "완성과 통합, 하나의 아름다운 주기가 성공적으로 마무리되는 날입니다. 충만한 성취감을 누립니다.", advice: "지금까지 달려온 자신을 마음껏 칭찬해 주세요. 완성을 축하하고 더 넓은 세상을 향해 나아가세요." }
     ];
 
-    /* 4. 화면 전환 및 카드 펼침 로직 */
+    /* 4. 화면 전환 및 카드 펼침 로직 (모바일 최적화) */
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(id);
@@ -684,22 +714,27 @@
       wrapper.innerHTML = '';
       
       const shuffledIndices = Array.from({ length: 22 }, (_, i) => i).sort(() => Math.random() - 0.5);
-      const totalCards = 17; // 화면에 부채꼴로 예쁘게 펼쳐질 장수
+      
+      // 모바일(화면 폭 480px 이하)에서는 카드 수와 간격을 좁혀 화면 밖 잘림 방지
+      const isMobile = window.innerWidth <= 480;
+      const totalCards = isMobile ? 11 : 17;
 
       for (let i = 0; i < totalCards; i++) {
         const cardEl = document.createElement('div');
         cardEl.className = 'tarot-card-spread';
         
-        // 부채꼴 회전 & 가로 배치 계산
-        const angle = (i - (totalCards - 1) / 2) * 4.2;
-        const xOffset = (i - (totalCards - 1) / 2) * 16;
+        const angleStep = isMobile ? 2.5 : 4.2;
+        const xStep = isMobile ? 9 : 16;
+        
+        const angle = (i - (totalCards - 1) / 2) * angleStep;
+        const xOffset = (i - (totalCards - 1) / 2) * xStep;
         
         cardEl.style.transform = `translateX(${xOffset}px) rotate(${angle}deg)`;
         cardEl.style.zIndex = i + 1;
 
         cardEl.innerHTML = `
           <div class="card-inner-pattern">
-            <span style="font-size:1.1rem; color:rgba(245,208,97,0.7);">✦</span>
+            <span style="font-size:1rem; color:rgba(245,208,97,0.7);">✦</span>
           </div>
         `;
 
@@ -710,7 +745,7 @@
     }
 
     function pickCard(cardIndex, cardEl) {
-      cardEl.style.transform += ' translateY(-60px) scale(1.15)';
+      cardEl.style.transform += ' translateY(-50px) scale(1.12)';
       cardEl.style.borderColor = '#fff';
       playCardShuffleSound();
 
@@ -731,7 +766,6 @@
       document.getElementById('resFortuneText').innerText = card.fortune;
       document.getElementById('resAdviceText').innerText = card.advice;
 
-      // 3D 플립 애니메이션 및 종소리
       setTimeout(() => {
         resultCard.classList.add('flipped');
         playChimeSound();
@@ -742,20 +776,20 @@
       showScreen('screenCover');
     }
 
-    /* 5. 생일 & 별자리 운세 로직 (매일 자정마다 변경) */
+    /* 5. 생일 & 별자리 운세 로직 (매일 자정 갱신) */
     const zodiacData = [
-      { name: "양자리", date: "03.21 ~ 04.19", icon: "♈", element: "불" },
-      { name: "황소자리", date: "04.20 ~ 05.20", icon: "♉", element: "흙" },
-      { name: "쌍둥이자리", date: "05.21 ~ 06.21", icon: "♊", element: "공기" },
-      { name: "게자리", date: "06.22 ~ 07.22", icon: "♋", element: "물" },
-      { name: "사자자리", date: "07.23 ~ 08.22", icon: "♌", element: "불" },
-      { name: "처녀자리", date: "08.23 ~ 09.22", icon: "♍", element: "흙" },
-      { name: "천칭자리", date: "09.23 ~ 10.22", icon: "♎", element: "공기" },
-      { name: "전갈자리", date: "10.23 ~ 11.22", icon: "♏", element: "물" },
-      { name: "궁수자리", date: "11.23 ~ 12.24", icon: "♐", element: "불" },
-      { name: "염소자리", date: "12.25 ~ 01.19", icon: "♑", element: "흙" },
-      { name: "물병자리", date: "01.20 ~ 02.18", icon: "♒", element: "공기" },
-      { name: "물고기자리", date: "02.19 ~ 03.20", icon: "♓", element: "물" }
+      { name: "양자리", date: "03.21 ~ 04.19", icon: "♈" },
+      { name: "황소자리", date: "04.20 ~ 05.20", icon: "♉" },
+      { name: "쌍둥이자리", date: "05.21 ~ 06.21", icon: "♊" },
+      { name: "게자리", date: "06.22 ~ 07.22", icon: "♋" },
+      { name: "사자자리", date: "07.23 ~ 08.22", icon: "♌" },
+      { name: "처녀자리", date: "08.23 ~ 09.22", icon: "♍" },
+      { name: "천칭자리", date: "09.23 ~ 10.22", icon: "♎" },
+      { name: "전갈자리", date: "10.23 ~ 11.22", icon: "♏" },
+      { name: "궁수자리", date: "11.23 ~ 12.24", icon: "♐" },
+      { name: "염소자리", date: "12.25 ~ 01.19", icon: "♑" },
+      { name: "물병자리", date: "01.20 ~ 02.18", icon: "♒" },
+      { name: "물고기자리", date: "02.19 ~ 03.20", icon: "♓" }
     ];
 
     const generalPhrases = [
@@ -793,7 +827,6 @@
       document.getElementById('todayDateBadge').innerText = `${year}년 ${month}월 ${day}일 오늘의 별빛`;
     }
 
-    // 날짜 기반 의사 난수 생성 (오늘 날짜 + 별자리 인덱스 = 오늘 하루 동안 고정되는 운세)
     function getDailyHash(zodiacIdx) {
       const now = new Date();
       const dateNum = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
