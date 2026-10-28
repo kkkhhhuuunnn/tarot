@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>행운을 점쳐보세요 - 달빛 타로</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Cinzel & Gowun Batang -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            batang: ['"Gowun Batang"', 'serif']
+          },
+          colors: {
+            night: {
+              950: '#060713',
+              900: '#0c0e22',
+              800: '#141838'
+            },
+            gold: {
+              300: '#fde68a',
+              400: '#facc15',
+              500: '#eab308'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Star twinkle animation */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    .animate-twinkle {
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    /* Glow text */
+    .glow-gold-text {
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.4), 0 0 40px rgba(250, 204, 21, 0.2);
+    }
+    .glow-box {
+      box-shadow: 0 0 35px rgba(250, 204, 21, 0.25);
+    }
+
+    /* 3D Card Flip */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Hide scrollbars */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-night-950 text-slate-100 font-batang min-h-screen overflow-hidden select-none flex flex-col justify-between relative">
+
+  <!-- Ambient Stars & Moon Background -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-12 left-1/4 w-1.5 h-1.5 bg-yellow-100 rounded-full animate-twinkle"></div>
+    <div class="absolute top-28 right-1/4 w-2 h-2 bg-yellow-200 rounded-full animate-twinkle" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-24 left-1/3 w-2 h-2 bg-white rounded-full animate-twinkle" style="animation-delay: 1.8s;"></div>
+    <div class="absolute top-1/2 right-12 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-twinkle" style="animation-delay: 0.5s;"></div>
+    <div class="absolute top-1/3 left-10 w-2 h-2 bg-yellow-100 rounded-full animate-twinkle" style="animation-delay: 2.2s;"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[34rem] h-[34rem] bg-indigo-950/40 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Top Simple Sound Control -->
+  <header class="relative z-30 p-4 flex justify-between items-center max-w-xl mx-auto w-full">
+    <div class="text-[11px] tracking-widest text-gold-300/60 font-cinzel">LUNAR TAROT</div>
+    <button id="soundToggleBtn" onclick="toggleSound()" class="w-8 h-8 rounded-full border border-gold-400/30 bg-night-900/60 flex items-center justify-center text-gold-300 hover:border-gold-300 text-xs transition-all active:scale-95">
+      <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+    </button>
+  </header>
+
+  <!-- Main Viewports (3 Simple Steps) -->
+  <main class="relative z-20 flex-1 flex flex-col items-center justify-center w-full px-4">
+
+    <!-- STEP 1: 초간단 첫 화면 (행운을 점쳐보세요) -->
+    <section id="screenIntro" onclick="goToStepSpread()" class="w-full max-w-md cursor-pointer flex flex-col items-center justify-center text-center py-12 transition-all duration-700 animate-fadeIn space-y-8">
+      
+      <!-- 은은한 달 일러스트 -->
+      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center group">
+        <div class="absolute inset-0 rounded-full bg-gold-400/10 blur-xl animate-pulse"></div>
+        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full border border-gold-400/50 bg-night-900 flex items-center justify-center text-gold-400 text-4xl shadow-xl transition-transform duration-500 group-hover:scale-105">
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <div class="absolute -top-1 -right-1 text-gold-300 text-xs animate-twinkle">
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+      </div>
+
+      <!-- 메인 문구 -->
+      <div class="space-y-3">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white glow-gold-text">
+          행운을 점쳐보세요
+        </h1>
+        <p class="text-sm md:text-base text-slate-400 font-light tracking-wide">
+          마음을 가라앉히고 운명의 카드를 만날 준비를 하세요
+        </p>
+      </div>
+
+      <!-- 터치 유도 버튼 -->
+      <div class="pt-4">
+        <div class="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-gold-400/10 border border-gold-400/40 text-gold-300 text-xs tracking-wider animate-pulse hover:bg-gold-400/20 transition-all">
+          <span>화면을 터치하여 카드 펼치기</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- STEP 2: 카드 쫘라락 펼쳐지고 1장 뽑기 화면 -->
+    <section id="screenSpread" class="hidden w-full flex flex-col items-center justify-center py-6 transition-all duration-700">
+      
+      <!-- 상단 문구 -->
+      <div class="text-center mb-6 md:mb-10 animate-pulse">
+        <p class="text-xs text-gold-300 tracking-widest font-cinzel mb-1">CHOOSE ONE</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-white glow-gold-text">
+          이 중에 한 장을 뽑으세요
+        </h2>
+        <p class="text-xs text-slate-400 mt-1">가장 마음이 이끌리는 카드에 손끝을 대어보세요</p>
+      </div>
+
+      <!-- 카드가 쫘라락 펼쳐지는 가로 부채꼴/스프레드 영역 -->
+      <div class="w-full max-w-4xl h-72 md:h-84 flex items-center justify-center relative overflow-hidden py-8">
+        <div id="cardsFanWrapper" class="relative w-full h-full flex items-center justify-center">
+          <!-- JS로 22장의 카드가 쫘라락 촤르륵 펼쳐지며 렌더링됩니다 -->
+        </div>
+      </div>
+
+      <div class="text-[11px] text-slate-500 mt-4 tracking-wider flex items-center space-x-1.5">
+        <i class="fa-solid fa-hand-pointer text-[10px] text-gold-400/60"></i>
+        <span>원하는 카드를 터치하면 곧바로 운명이 열립니다</span>
+      </div>
+    </section>
+
+
+    <!-- STEP 3: 선택된 카드 줌인 플립 & 오늘의 행운 결과 -->
+    <section id="screenResult" class="hidden w-full max-w-md flex flex-col items-center justify-center text-center py-6 transition-all duration-700 animate-fadeIn space-y-6">
+      
+      <!-- 3D 뒤집힘 카드 카드 컴포넌트 -->
+      <div class="perspective-1000 w-52 h-80 md:w-56 md:h-84 cursor-pointer" onclick="toggleCardOrientation()">
+        <div id="revealedCardFlipper" class="relative w-full h-full rounded-2xl transform-style-3d transition-transform duration-1000 rotate-y-180 glow-box">
+          
+          <!-- 카드 뒷면 (플립 전) -->
+          <div class="absolute inset-0 w-full h-full rounded-2xl border border-gold-400/50 bg-night-900 p-2 flex flex-col items-center justify-center backface-hidden">
+            <div class="w-full h-full rounded-xl border border-gold-400/30 bg-night-950 flex flex-col items-center justify-center text-gold-400">
+              <i class="fa-solid fa-moon text-3xl mb-2"></i>
+              <span class="text-[10px] font-cinzel tracking-widest text-gold-300">TAROT</span>
+            </div>
+          </div>
+
+          <!-- 카드 앞면 (플립 후) -->
+          <div id="cardFaceFront" class="absolute inset-0 w-full h-full rounded-2xl border-2 border-gold-400/80 bg-gradient-to-b from-night-900 via-night-950 to-night-900 p-3.5 flex flex-col justify-between backface-hidden rotate-y-180 shadow-2xl">
+            <!-- 상단 로마숫자 & 영문 -->
+            <div class="flex justify-between items-center text-[10px] font-cinzel text-gold-300 tracking-wider">
+              <span id="resCardNum">0</span>
+              <span id="resCardEn">THE FOOL</span>
+            </div>
+
+            <!-- 중앙 아이콘 일러스트 -->
+            <div class="my-auto flex flex-col items-center justify-center space-y-2">
+              <div id="resIconBox" class="w-20 h-20 rounded-full border border-gold-400/40 bg-night-950 flex items-center justify-center text-3xl shadow-inner">
+                <i id="resCardIcon" class="fa-solid fa-wand-magic-sparkles text-gold-400"></i>
+              </div>
+              <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent"></div>
+            </div>
+
+            <!-- 하단 한글 이름 & 키워드 -->
+            <div class="space-y-1">
+              <h3 id="resCardKo" class="text-base font-bold text-white tracking-wide">바보</h3>
+              <p id="resCardKeywords" class="text-[11px] text-gold-300/80 font-sans font-light">새로운 시작 · 자유 · 순수</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 오늘의 행운 해석 박스 -->
+      <div class="w-full bg-night-900/90 border border-gold-400/40 rounded-2xl p-5 shadow-xl text-left space-y-3">
+        <div class="flex items-center space-x-2 border-b border-gold-400/20 pb-2">
+          <i class="fa-solid fa-sparkles text-gold-400 text-xs"></i>
+          <span class="text-xs font-bold text-gold-300">오늘의 행운 메시지</span>
+        </div>
+        <p id="resFortuneGeneral" class="text-xs md:text-sm text-slate-200 leading-relaxed font-light">
+          새로운 여정이 막 시작되었습니다. 두려움 없이 가벼운 발걸음으로 직관을 믿고 첫 발을 내딛으세요.
+        </p>
+        <div class="p-3 rounded-xl bg-night-950/80 border border-gold-400/20 text-xs text-gold-200/90 flex items-start space-x-2">
+          <i class="fa-solid fa-clover text-gold-400 mt-0.5 text-xs"></i>
+          <span id="resFortuneAdvice">오늘 하루는 조건 없는 순수함과 직관이 당신에게 큰 행운을 가져다줍니다.</span>
+        </div>
+      </div>
+
+      <!-- 다시 점치기 버튼 -->
+      <button onclick="goToStepIntro()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-night-950 font-bold text-xs tracking-widest shadow-lg shadow-gold-500/20 active:scale-98 transition-all flex items-center justify-center space-x-2">
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>다시 점치기</span>
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- Simple Footer -->
+  <footer class="relative z-20 py-4 text-center text-[10px] text-slate-400 tracking-wider font-cinzel">
+    LUNAR TAROT · INTUITIVE READING
+  </footer>
+
+  <!-- Web Audio & Minimal App Logic -->
+  <script>
+    /* ========================================================
+       1. 22 Major Arcana Database (간결한 행운 메시지 중심)
+       ======================================================== */
+    const TAROT_CARDS = [
+      { id: 0, num: '0', en: 'THE FOOL', ko: '바보', icon: 'fa-wand-magic-sparkles', color: '#f59e0b', keywords: '새로운 시작 · 자유 · 순수', general: '두려움 없이 새로운 첫 발을 내딛기에 가장 좋은 날입니다. 마음에 품어둔 일을 주저 말고 시작해 보세요.', advice: '오늘의 조언: 복잡하게 재지 말고 마음이 이끄는 첫 느낌을 믿으세요.' },
+      { id: 1, num: 'I', en: 'THE MAGICIAN', ko: '마법사', icon: 'fa-hat-wizard', color: '#ec4899', keywords: '재능 · 기회 · 자신감', general: '원하는 것을 현실로 만들어낼 재능과 에너지가 넘쳐납니다. 당신의 언변과 매력이 사람들을 사로잡습니다.', advice: '오늘의 조언: 당신의 능력을 당당하게 드러내세요. 주도권을 쥘 때입니다.' },
+      { id: 2, num: 'II', en: 'THE HIGH PRIESTESS', ko: '여사제', icon: 'fa-scroll', color: '#6366f1', keywords: '직관 · 통찰 · 침묵', general: '말을 많이 하기보다 내면의 소리에 귀를 기울일 때 답이 보입니다. 차분한 통찰력이 지혜를 밝혀줍니다.', advice: '오늘의 조언: 섣부른 행동보다 한 템포 관조하며 상황을 살피세요.' },
+      { id: 3, num: 'III', en: 'THE EMPRESS', ko: '여황제', icon: 'fa-crown', color: '#10b981', keywords: '풍요 · 사랑 · 온화함', general: '삶에 포근한 안정과 풍요로움이 깃드는 운세입니다. 주변 사람들과 따뜻한 온기를 나누기 좋습니다.', advice: '오늘의 조언: 스스로를 아끼고 작은 사치와 휴식을 기꺼이 즐기세요.' },
+      { id: 4, num: 'IV', en: 'THE EMPEROR', ko: '황제', icon: 'fa-chess-king', color: '#ef4444', keywords: '안정 · 결단 · 질서', general: '흔들리지 않는 확고한 기준과 책임감이 성과를 이끕니다. 주관을 가지고 단호하게 밀고 나가세요.', advice: '오늘의 조언: 세운 원칙을 지키며 중심을 잃지 않는 것이 핵심입니다.' },
+      { id: 5, num: 'V', en: 'THE HIEROPHANT', ko: '교황', icon: 'fa-church', color: '#8b5cf6', keywords: '조언 · 신뢰 · 귀인', general: '신뢰할 수 있는 사람이나 귀인의 조언을 통해 고민의 실마리가 풀립니다. 정석적인 길이 가장 빠릅니다.', advice: '오늘의 조언: 혼자 끙끙 앓지 말고 믿을 만한 멘토에게 털어놓으세요.' },
+      { id: 6, num: 'VI', en: 'THE LOVERS', ko: '연인', icon: 'fa-heart', color: '#f43f5e', keywords: '인연 · 조화 · 행복한 선택', general: '설레는 교감과 기분 좋은 인연의 기운이 가득합니다. 당신을 설레게 만드는 선택이 정답입니다.', advice: '오늘의 조언: 머리로 계산하기보다 가슴이 뛰는 쪽을 선택하세요.' },
+      { id: 7, num: 'VII', en: 'THE CHARIOT', ko: '전차', icon: 'fa-horse-head', color: '#0284c7', keywords: '돌파 · 승리 · 추진력', general: '망설임을 끝내고 힘차게 전진할 타이밍입니다. 눈앞의 장애물은 당신의 추진력 앞에 무너집니다.', advice: '오늘의 조언: 브레이크를 풀고 목표를 향해 거침없이 직진하세요.' },
+      { id: 8, num: 'VIII', en: 'STRENGTH', ko: '힘', icon: 'fa-shield-halved', color: '#d97706', keywords: '인내 · 온유함 · 극복', general: '강한 힘보다 부드러운 유연함이 상황을 이깁니다. 따뜻한 마음과 끈기가 결국 상대를 감동시킵니다.', advice: '오늘의 조언: 화를 내거나 조급해하지 말고 부드럽게 감싸 안으세요.' },
+      { id: 9, num: 'IX', en: 'THE HERMIT', ko: '은둔자', icon: 'fa-lightbulb', color: '#64748b', keywords: '성찰 · 탐구 · 홀로서기', general: '세상의 소음을 잠시 끄고 혼자만의 사색에 잠기기 좋습니다. 내면에서 명확한 진실이 떠오릅니다.', advice: '오늘의 조언: 나만의 조용한 시간을 확보해 에너지를 채우세요.' },
+      { id: 10, num: 'X', en: 'WHEEL OF FORTUNE', ko: '운명의 수레바퀴', icon: 'fa-dharmachakra', color: '#eab308', keywords: '행운 · 전환점 · 타이밍', general: '당신에게 유리한 행운의 바람이 불어오고 있습니다. 우연처럼 다가오는 기회를 가볍게 낚아채세요.', advice: '오늘의 조언: 타이밍이 생명입니다. 변화의 흐름에 자연스럽게 몸을 실으세요.' },
+      { id: 11, num: 'XI', en: 'JUSTICE', ko: '정의', icon: 'fa-scale-balanced', color: '#06b6d4', keywords: '균형 · 공정함 · 명확성', general: '주고받음의 균형이 깔끔하게 맞아떨어집니다. 맺고 끊음이 분명할수록 뒤탈 없이 평온합니다.', advice: '오늘의 조언: 감정을 걷어내고 상식과 객관적인 기준에 따라 판단하세요.' },
+      { id: 12, num: 'XII', en: 'THE HANGED MAN', ko: '매달린 사람', icon: 'fa-person', color: '#3b82f6', keywords: '새로운 시각 · 기다림 · 수용', general: '상황을 억지로 바꾸려 하지 말고 잠시 다른 각도에서 바라보세요. 기다림 끝에 번뜩이는 통찰이 옵니다.', advice: '오늘의 조언: 발버둥 치지 말고 편안하게 흐름을 관찰해 보세요.' },
+      { id: 13, num: 'XIII', en: 'DEATH', ko: '죽음', icon: 'fa-skull', color: '#475569', keywords: '종결 · 새로운 시작 · 매듭', general: '낡고 무거운 짐을 내려놓고 새롭게 거듭나는 날입니다. 미련을 버리는 순간 새로운 문이 활짝 열립니다.', advice: '오늘의 조언: 끝난 일에 미련 두지 마세요. 새로움이 이미 다가오고 있습니다.' },
+      { id: 14, num: 'XIV', en: 'TEMPERANCE', ko: '절제', icon: 'fa-wine-glass', color: '#14b8a6', keywords: '조화 · 밸런스 · 평온', general: '극단을 피해 물 흐르듯 잔잔한 평온을 유지하세요. 마음의 균형이 잡힐 때 만사가 순조롭습니다.', advice: '오늘의 조언: 과유불급! 일과 휴식, 감정의 온도를 적절히 맞추세요.' },
+      { id: 15, num: 'XV', en: 'THE DEVIL', ko: '악마', icon: 'fa-fire', color: '#b91c1c', keywords: '유혹 · 강렬한 끌림 · 주의', general: '뿌리치기 힘든 달콤한 유혹이나 충동적인 지출에 유의하세요. 잠시 멈춰 서서 진짜 가치를 보세요.', advice: '오늘의 조언: 순간적인 쾌락이나 조급한 마음에 휘둘리지 마세요.' },
+      { id: 16, num: 'XVI', en: 'THE TOWER', ko: '탑', icon: 'fa-bolt', color: '#ea580c', keywords: '급작스러운 각성 · 틀의 붕괴', general: '예상치 못한 소식이나 변화가 답답했던 틀을 깨뜨립니다. 껍질을 깨고 나오는 상쾌한 계기입니다.', advice: '오늘의 조언: 변화를 두려워하지 마세요. 더 튼튼한 토대를 세울 기회입니다.' },
+      { id: 17, num: 'XVII', en: 'THE STAR', ko: '별', icon: 'fa-star', color: '#38bdf8', keywords: '희망 · 치유 · 영감', general: '어둠 뒤에 가장 찬란한 희망의 별이 떴습니다. 맑은 기운이 상처를 어루만지고 기대를 채워줍니다.', advice: '오늘의 조언: 당신의 꿈을 믿으세요. 소망하는 바가 곧 닿을 것입니다.' },
+      { id: 18, num: 'XVIII', en: 'THE MOON', ko: '달', icon: 'fa-moon', color: '#a855f7', keywords: '감수성 · 안개 · 직관', general: '안갯속처럼 마음이 다소 싱숭생숭할 수 있습니다. 상상 속의 불안에 떨지 말고 눈앞에 집중하세요.', advice: '오늘의 조언: 밤이 지나면 해가 뜹니다. 불필요한 걱정은 강물에 흘려보내세요.' },
+      { id: 19, num: 'XIX', en: 'THE SUN', ko: '태양', icon: 'fa-sun', color: '#f97316', keywords: '최고의 행운 · 활력 · 성공', general: '따스한 햇살이 온몸을 감싸듯 기쁨과 활력이 넘치는 대길의 날입니다. 무엇을 해도 웃음이 따릅니다.', advice: '오늘의 조언: 밝은 미소와 긍정적인 태도로 사람들에게 빛을 전하세요.' },
+      { id: 20, num: 'XX', en: 'JUDGEMENT', ko: '심판', icon: 'fa-bullhorn', color: '#e11d48', keywords: '부활 · 반가운 소식 · 결실', general: '오래 기다려온 반가운 연락이나 정당한 보상이 찾아옵니다. 그동안 흘린 땀방울이 보답받습니다.', advice: '오늘의 조언: 확신을 가지고 당당하게 결과를 맞이하세요.' },
+      { id: 21, num: 'XXI', en: 'THE WORLD', ko: '세계', icon: 'fa-earth-asia', color: '#16a34a', keywords: '완성 · 조화 · 최고의 결실', general: '완벽한 마무리를 짓고 한 차원 높은 곳으로 도약합니다. 부족함 없이 든든하고 만족스러운 하루입니다.', advice: '오늘의 조언: 해낸 자신을 충분히 칭찬하고 감사의 마음을 품으세요.' }
+    ];
+
+    /* ========================================================
+       2. Web Audio Synthesizer (카드 촤르륵 소리 & 신비로운 차임)
+       ======================================================== */
+    let audioCtx = null;
+    let isSoundOn = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // 카드 쫘라락 펼쳐질 때의 챠르륵/스치는 효과음
+    function playCardRiffleSound() {
+      if (!isSoundOn) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const count = 10;
+        for (let i = 0; i < count; i++) {
+          setTimeout(() => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(300 + (i * 45) + Math.random() * 50, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.08);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+          }, i * 35);
+        }
+      } catch(e) {}
+    }
+
+    // 카드 뒤집힐 때의 영롱한 종소리
+    function playMysticRevealSound() {
+      if (!isSoundOn) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const notes = [528, 792, 1056];
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1.2);
+          }, idx * 120);
+        });
+      } catch(e) {}
+    }
+
+    function toggleSound() {
+      isSoundOn = !isSoundOn;
+      const icon = document.getElementById('soundIcon');
+      if (isSoundOn) {
+        icon.className = 'fa-solid fa-volume-high';
+        playCardRiffleSound();
+      } else {
+        icon.className = 'fa-solid fa-volume-xmark';
+      }
+    }
+
+    /* ========================================================
+       3. Step Transitions & Minimal Card Fan Interaction
+       ======================================================== */
+    const screenIntro = document.getElementById('screenIntro');
+    const screenSpread = document.getElementById('screenSpread');
+    const screenResult = document.getElementById('screenResult');
+
+    function goToStepIntro() {
+      screenResult.classList.add('hidden');
+      screenSpread.classList.add('hidden');
+      screenIntro.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // STEP 1 -> STEP 2 (카드 쫘라락 펼치기)
+    function goToStepSpread() {
+      screenIntro.classList.add('hidden');
+      screenResult.classList.add('hidden');
+      screenSpread.classList.remove('hidden');
+
+      renderFanCards();
+      playCardRiffleSound();
+    }
+
+    // 22장 덱을 쫘라락 부채꼴/가로로 펼치는 애니메이션 생성
+    function renderFanCards() {
+      const wrapper = document.getElementById('cardsFanWrapper');
+      wrapper.innerHTML = '';
+
+      // 22장 셔플
+      const shuffled = [...TAROT_CARDS].sort(() => Math.random() - 0.5);
+
+      shuffled.forEach((card, idx) => {
+        const total = shuffled.length;
+        // 각 카드별 회전각과 x축 오프셋 계산 (부채꼴 펼침)
+        const offsetPercent = (idx - (total - 1) / 2) * 16; // 카드 간격
+        const rotateDeg = (idx - (total - 1) / 2) * 2.2;    // 부채꼴 각도
+
+        const cardEl = document.createElement('div');
+        cardEl.className = "absolute cursor-pointer transition-all duration-300 select-none hover:-translate-y-12 hover:scale-110 hover:z-40";
+        cardEl.style.left = `calc(50% + ${offsetPercent}px)`;
+        cardEl.style.transform = `translateX(-50%) rotate(${rotateDeg}deg)`;
+        cardEl.style.zIndex = idx + 1;
+
+        cardEl.innerHTML = `
+          <div class="w-18 h-28 sm:w-20 sm:h-32 md:w-24 md:h-36 rounded-xl border border-gold-400/60 bg-gradient-to-b from-night-900 to-night-950 p-1 shadow-2xl flex flex-col items-center justify-between pointer-events-auto">
+            <div class="w-full h-full rounded-lg border border-gold-400/30 bg-night-950 flex flex-col items-center justify-center text-gold-400/80">
+              <i class="fa-solid fa-moon text-xs mb-1"></i>
+              <span class="text-[8px] font-cinzel tracking-widest text-gold-300/70">TAROT</span>
+            </div>
+          </div>
+        `;
+
+        // 카드 1장 선택 시 이벤트
+        cardEl.onclick = (e) => {
+          e.stopPropagation();
+          pickOneCard(card);
+        };
+
+        wrapper.appendChild(cardEl);
+      });
+    }
+
+    // STEP 2 -> STEP 3 (1장 뽑아 결과 화면으로 줌인)
+    function pickOneCard(selectedCard) {
+      playMysticRevealSound();
+
+      screenSpread.classList.add('hidden');
+      screenResult.classList.remove('hidden');
+
+      // 바인딩
+      document.getElementById('resCardNum').innerText = selectedCard.num;
+      document.getElementById('resCardEn').innerText = selectedCard.en;
+      document.getElementById('resCardKo').innerText = selectedCard.ko;
+      document.getElementById('resCardKeywords').innerText = selectedCard.keywords;
+      document.getElementById('resFortuneGeneral').innerText = selectedCard.general;
+      document.getElementById('resFortuneAdvice').innerText = selectedCard.advice;
+
+      const icon = document.getElementById('resCardIcon');
+      icon.className = `fa-solid ${selectedCard.icon} text-3xl`;
+      icon.style.color = selectedCard.color;
+
+      // 플립 연출 (처음엔 뒷면이었다가 0.2초 후 촥 회전하며 앞면 공개)
+      const flipper = document.getElementById('revealedCardFlipper');
+      flipper.classList.remove('rotate-y-180');
+      setTimeout(() => {
+        flipper.classList.add('rotate-y-180');
+      }, 200);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleCardOrientation() {
+      const flipper = document.getElementById('revealedCardFlipper');
+      flipper.classList.toggle('rotate-y-180');
+    }
+  </script>
+</body>
+</html>
