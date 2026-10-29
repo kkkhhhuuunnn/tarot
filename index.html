@@ -51,14 +51,14 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 14px 12px;
+      padding: 14px 10px;
     }
 
     .screen {
@@ -138,7 +138,7 @@
       50% { box-shadow: 0 0 25px rgba(245, 208, 97, 0.5); }
     }
 
-    /* 2. 모바일 10장 짤림 방지 그리드 선택 화면 */
+    /* 2. 모바일 10장 짤림 방지 그리드 선택 화면 (패딩 및 간격 최적화) */
     .deck-instruction {
       font-size: 1.05rem;
       font-weight: 600;
@@ -150,18 +150,18 @@
 
     .grid-deck-wrapper {
       width: 100%;
-      max-width: 380px;
+      max-width: 350px;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
+      gap: 5px;
       justify-items: center;
-      padding: 2px;
+      padding: 0;
     }
 
     .tarot-card-grid {
       width: 100%;
       aspect-ratio: 2 / 3.1;
-      border-radius: 5px;
+      border-radius: 4px;
       background: linear-gradient(135deg, #10152e 0%, #1c244c 50%, #0d1124 100%);
       border: 1.2px solid var(--gold-primary);
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
@@ -170,7 +170,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 3px;
+      padding: 2px;
       touch-action: manipulation;
     }
 
@@ -178,7 +178,7 @@
       width: 100%;
       height: 100%;
       border: 1px solid rgba(245, 208, 97, 0.45);
-      border-radius: 3px;
+      border-radius: 2px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -188,14 +188,14 @@
     }
 
     .tarot-card-grid:active, .tarot-card-grid:hover {
-      transform: translateY(-4px) scale(1.03);
+      transform: translateY(-3px) scale(1.02);
       border-color: #fff;
-      box-shadow: 0 0 15px rgba(245, 208, 97, 0.8);
+      box-shadow: 0 0 12px rgba(245, 208, 97, 0.8);
     }
 
     .card-number-badge {
       font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--gold-primary);
       font-weight: 700;
     }
@@ -335,13 +335,13 @@
       box-shadow: 0 0 15px rgba(245, 208, 97, 0.25);
     }
 
-    /* 4. 별자리 & 생일 운세 */
+    /* 4. 별자리 & 생일 운세 (입력창 삐져나옴 방지 및 크기 고정) */
     .horoscope-header {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .horoscope-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: var(--gold-light);
       font-weight: 700;
       margin-bottom: 4px;
@@ -374,6 +374,7 @@
       width: 100%;
     }
 
+    /* 입력창 및 셀렉트 박스 100% 강제 고정 (삐져나옴 방지) */
     .date-input, .select-input {
       background: #0d0f1e;
       border: 1px solid rgba(245, 208, 97, 0.4);
@@ -381,9 +382,10 @@
       padding: 9px 10px;
       border-radius: 8px;
       font-family: inherit;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       outline: none;
       width: 100%;
+      max-width: 100%;
     }
 
     .horoscope-result-card {
@@ -714,7 +716,7 @@
         cardEl.innerHTML = `
           <div class="card-inner-frame">
             <span class="card-number-badge">${i + 1}</span>
-            <span style="font-size:0.6rem; color:rgba(245,208,97,0.7); margin-top:1px;">✦</span>
+            <span style="font-size:0.55rem; color:rgba(245,208,97,0.7); margin-top:1px;">✦</span>
           </div>
         `;
 
@@ -726,7 +728,7 @@
     }
 
     function pickCard(cardIndex, cardEl) {
-      cardEl.style.transform = 'translateY(-4px) scale(1.03)';
+      cardEl.style.transform = 'translateY(-3px) scale(1.02)';
       cardEl.style.borderColor = '#fff';
       playCardShuffleSound();
 
@@ -785,7 +787,7 @@
       "솔직한 감정 표현이 상대방의 닫힌 마음을 여는 열쇠가 됩니다.",
       "서로에 대한 사소한 배려가 깊은 감동과 신뢰로 이어지는 날입니다.",
       "새로운 만남의 기운이 감돕니다. 가벼운 외출이나 모임에 적극적으로 참여해보세요.",
-      "감정에 치우치기보다 차분히 상대의 이야기를 귀기울여주는 것이 길합니다.",
+      "감정에 치우치기보다 차분히 상대의 이야기에 귀를 기울여주는 것이 길합니다.",
       "말 한마디의 온도가 관계의 온도를 좌우합니다. 칭찬을 아끼지 마세요."
     ];
 
@@ -840,7 +842,7 @@
       else if ((month == 10 && day >= 23) || (month == 11 && day <= 22)) idx = 7;
       else if ((month == 11 && day >= 23) || (month == 12 && day <= 24)) idx = 8;
       else if ((month == 12 && day >= 25) || (month == 1 && day <= 19)) idx = 9;
-      else if ((month == 1 && day >= 23) || (month == 2 && day <= 18)) idx = 10;
+      else if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) idx = 10;
       else idx = 11;
 
       document.getElementById('zodiacSelect').value = idx;
