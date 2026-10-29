@@ -138,38 +138,36 @@
       50% { box-shadow: 0 0 25px rgba(245, 208, 97, 0.5); }
     }
 
-    /* 2. 카드 펼침 화면 */
+    /* 2. 모바일 최적화 그리드 카드 선택 화면 */
     .deck-instruction {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--gold-light);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       letter-spacing: 1px;
       text-shadow: 0 0 12px rgba(245, 208, 97, 0.4);
     }
 
-    .deck-wrapper {
-      position: relative;
+    .grid-deck-wrapper {
       width: 100%;
-      height: 310px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
-      overflow: visible;
+      max-width: 380px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      justify-items: center;
+      padding: 4px;
+      margin-bottom: 10px;
     }
 
-    .tarot-card-spread {
-      position: absolute;
-      width: 70px;
-      height: 122px;
+    .tarot-card-grid {
+      width: 100%;
+      aspect-ratio: 2 / 3.2;
       border-radius: 8px;
       background: radial-gradient(circle, #1a1e3a 0%, #0d0f1e 100%);
       border: 1.5px solid rgba(245, 208, 97, 0.4);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
       cursor: pointer;
-      transform-origin: center 290px;
-      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -177,7 +175,7 @@
       touch-action: manipulation;
     }
 
-    .tarot-card-spread .card-inner-pattern {
+    .tarot-card-grid .card-inner-pattern {
       width: 100%;
       height: 100%;
       border: 1px dashed rgba(245, 208, 97, 0.35);
@@ -189,10 +187,17 @@
       pointer-events: none;
     }
 
-    .tarot-card-spread:active {
-      z-index: 100 !important;
+    .tarot-card-grid:active, .tarot-card-grid:hover {
+      transform: translateY(-5px);
       border-color: var(--gold-primary);
-      box-shadow: 0 0 20px rgba(245, 208, 97, 0.7);
+      box-shadow: 0 0 18px rgba(245, 208, 97, 0.7);
+    }
+
+    .card-number-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      color: var(--gold-primary);
+      font-weight: 700;
     }
 
     /* 3. 타로 결과 화면 */
@@ -461,13 +466,13 @@
       </svg>
       <h1 class="brand-title">정후이 타로</h1>
       <p class="brand-sub">행운을 점쳐보세요</p>
-      <button class="btn-start" id="mainStartBtn" type="button">화면을 터치하여 카드 펼치기</button>
+      <button class="btn-start" id="mainStartBtn" type="button">화면을 터치하여 카드 고르기</button>
     </div>
 
-    <!-- 2단계: 카드 펼침 & 선택 화면 -->
+    <!-- 2단계: 모바일 그리드 카드 선택 화면 -->
     <div class="screen" id="screenSpread">
-      <div class="deck-instruction">이 중에 한 장을 뽑으세요</div>
-      <div class="deck-wrapper" id="deckWrapper"></div>
+      <div class="deck-instruction">마음에 드는 카드를 한 장 선택하세요</div>
+      <div class="grid-deck-wrapper" id="deckWrapper"></div>
     </div>
 
     <!-- 3단계: 카드 결과 & 해설 화면 -->
@@ -594,7 +599,7 @@
     resizeCanvas();
     animateStars();
 
-    /* 2. 안전한 Web Audio 효과음 (에러 발생 시에도 무시하고 화면 동작) */
+    /* 2. 안전한 Web Audio 효과음 */
     let audioCtx = null;
 
     function getAudioContext() {
@@ -606,9 +611,7 @@
         if (audioCtx && audioCtx.state === 'suspended') {
           audioCtx.resume();
         }
-      } catch (e) {
-        // 오디오 미지원 환경 방어
-      }
+      } catch (e) {}
       return audioCtx;
     }
 
@@ -692,45 +695,26 @@
 
     function goToSpread() {
       showScreen('screenSpread');
-      renderSpreadDeck();
+      renderGridDeck();
       playCardShuffleSound();
     }
 
-    function renderSpreadDeck() {
+    /* 6장 또는 9장의 깔끔한 그리드 카드 배열 생성 */
+    function renderGridDeck() {
       const wrapper = document.getElementById('deckWrapper');
       wrapper.innerHTML = '';
       
       const shuffledIndices = Array.from({ length: 22 }, (_, i) => i).sort(() => Math.random() - 0.5);
-      const clientWidth = document.documentElement.clientWidth || window.innerWidth;
-      
-      let totalCards = 9;
-      let xStep = 7.5;
-      let angleStep = 2.0;
-
-      if (clientWidth > 420) {
-        totalCards = 11;
-        xStep = 10;
-        angleStep = 2.4;
-      }
-      if (clientWidth > 600) {
-        totalCards = 15;
-        xStep = 14;
-        angleStep = 3.4;
-      }
+      const totalCards = 6; // 한 눈에 보기 편한 6장 배치 (원하시면 9장으로 변경 가능)
 
       for (let i = 0; i < totalCards; i++) {
         const cardEl = document.createElement('div');
-        cardEl.className = 'tarot-card-spread';
-        
-        const angle = (i - (totalCards - 1) / 2) * angleStep;
-        const xOffset = (i - (totalCards - 1) / 2) * xStep;
-        
-        cardEl.style.transform = `translateX(${xOffset}px) rotate(${angle}deg)`;
-        cardEl.style.zIndex = i + 1;
+        cardEl.className = 'tarot-card-grid';
 
         cardEl.innerHTML = `
           <div class="card-inner-pattern">
-            <span style="font-size:0.9rem; color:rgba(245,208,97,0.7);">✦</span>
+            <span class="card-number-badge">${i + 1}</span>
+            <span style="font-size:0.8rem; color:rgba(245,208,97,0.7); margin-top:2px;">✦</span>
           </div>
         `;
 
@@ -742,14 +726,14 @@
     }
 
     function pickCard(cardIndex, cardEl) {
-      cardEl.style.transform += ' translateY(-45px) scale(1.12)';
+      cardEl.style.transform = 'translateY(-8px) scale(1.05)';
       cardEl.style.borderColor = '#fff';
       playCardShuffleSound();
 
       setTimeout(() => {
         showScreen('screenResult');
         displayResult(tarotDeck[cardIndex]);
-      }, 350);
+      }, 300);
     }
 
     function displayResult(card) {
