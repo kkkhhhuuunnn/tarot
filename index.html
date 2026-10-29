@@ -51,14 +51,14 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 480px;
+      max-width: 420px;
       margin: 0 auto;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 14px 10px;
+      padding: 12px 10px;
     }
 
     .screen {
@@ -81,9 +81,9 @@
 
     /* 1. 표지 화면 */
     .cover-moon {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 16px;
+      width: 65px;
+      height: 65px;
+      margin-bottom: 14px;
       filter: drop-shadow(0 0 20px rgba(245, 208, 97, 0.45));
       animation: floatMoon 4s ease-in-out infinite;
     }
@@ -95,21 +95,21 @@
 
     .brand-title {
       font-family: 'Cinzel', 'Noto Serif KR', serif;
-      font-size: 2rem;
+      font-size: 1.85rem;
       font-weight: 900;
       letter-spacing: 3px;
       background: linear-gradient(135deg, #fff 20%, var(--gold-light) 60%, var(--gold-primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .brand-sub {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--gold-primary);
       letter-spacing: 1.5px;
       font-weight: 400;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       text-shadow: 0 0 10px rgba(245, 208, 97, 0.3);
     }
 
@@ -117,8 +117,8 @@
       background: linear-gradient(135deg, rgba(245, 208, 97, 0.15), rgba(184, 134, 11, 0.25));
       border: 1px solid var(--gold-primary);
       color: var(--gold-light);
-      padding: 14px 28px;
-      font-size: 0.95rem;
+      padding: 13px 26px;
+      font-size: 0.92rem;
       font-weight: 600;
       font-family: inherit;
       border-radius: 40px;
@@ -138,33 +138,33 @@
       50% { box-shadow: 0 0 25px rgba(245, 208, 97, 0.5); }
     }
 
-    /* 2. 모바일 10장 짤림 방지 그리드 선택 화면 (패딩 및 간격 최적화) */
+    /* 2. 모바일 8장 최적화 그리드 선택 화면 (4열 x 2행 배치로 짤림 방지) */
     .deck-instruction {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--gold-light);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       letter-spacing: 1px;
       text-shadow: 0 0 10px rgba(245, 208, 97, 0.4);
     }
 
     .grid-deck-wrapper {
       width: 100%;
-      max-width: 350px;
+      max-width: 320px;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
       justify-items: center;
       padding: 0;
     }
 
     .tarot-card-grid {
       width: 100%;
-      aspect-ratio: 2 / 3.1;
+      aspect-ratio: 2 / 3.0;
       border-radius: 4px;
       background: linear-gradient(135deg, #10152e 0%, #1c244c 50%, #0d1124 100%);
       border: 1.2px solid var(--gold-primary);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
       cursor: pointer;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       display: flex;
@@ -188,7 +188,7 @@
     }
 
     .tarot-card-grid:active, .tarot-card-grid:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translateY(-3px) scale(1.03);
       border-color: #fff;
       box-shadow: 0 0 12px rgba(245, 208, 97, 0.8);
     }
@@ -203,9 +203,9 @@
     /* 3. 타로 결과 화면 */
     .result-card-container {
       perspective: 1000px;
-      width: 130px;
-      height: 220px;
-      margin: 0 auto 14px;
+      width: 120px;
+      height: 200px;
+      margin: 0 auto 12px;
     }
 
     .result-card-3d {
@@ -215,7 +215,7 @@
       transform-style: preserve-3d;
       transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
       border-radius: 10px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
     }
 
     .result-card-3d.flipped {
@@ -249,20 +249,20 @@
 
     .card-number {
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--gold-primary);
       letter-spacing: 2px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .card-icon {
-      font-size: 2.8rem;
-      margin: 6px 0;
+      font-size: 2.5rem;
+      margin: 4px 0;
       filter: drop-shadow(0 0 10px rgba(245, 208, 97, 0.4));
     }
 
     .card-title-kr {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: #fff;
       margin-bottom: 2px;
@@ -270,7 +270,7 @@
 
     .card-title-en {
       font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--gold-light);
       letter-spacing: 1px;
     }
@@ -278,29 +278,29 @@
     .reading-box {
       background: rgba(20, 23, 46, 0.75);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
       text-align: left;
       width: 100%;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     .reading-section-title {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--gold-primary);
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
       gap: 5px;
     }
 
     .reading-text {
-      font-size: 0.88rem;
-      line-height: 1.55;
+      font-size: 0.84rem;
+      line-height: 1.5;
       color: #e2e7f5;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       word-break: keep-all;
     }
 
@@ -311,7 +311,7 @@
     .btn-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
       width: 100%;
     }
 
@@ -319,8 +319,8 @@
       background: rgba(245, 208, 97, 0.12);
       border: 1px solid var(--gold-primary);
       color: var(--gold-light);
-      padding: 11px 16px;
-      font-size: 0.88rem;
+      padding: 10px 14px;
+      font-size: 0.85rem;
       font-family: inherit;
       border-radius: 30px;
       cursor: pointer;
@@ -335,24 +335,24 @@
       box-shadow: 0 0 15px rgba(245, 208, 97, 0.25);
     }
 
-    /* 4. 별자리 & 생일 운세 (입력창 삐져나옴 방지 및 크기 고정) */
+    /* 4. 별자리 & 생일 운세 (입력창 가로 폭 완벽 일치 고정) */
     .horoscope-header {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .horoscope-title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--gold-light);
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .horoscope-date-badge {
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--gold-primary);
       border: 1px solid rgba(245, 208, 97, 0.4);
-      padding: 2px 10px;
+      padding: 2px 8px;
       border-radius: 20px;
       background: rgba(245, 208, 97, 0.08);
     }
@@ -361,89 +361,90 @@
       background: rgba(20, 23, 46, 0.8);
       border: 1px solid rgba(245, 208, 97, 0.3);
       border-radius: 12px;
-      padding: 12px;
+      padding: 10px 12px;
       width: 100%;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .input-row {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-top: 8px;
+      margin-top: 6px;
       width: 100%;
     }
 
-    /* 입력창 및 셀렉트 박스 100% 강제 고정 (삐져나옴 방지) */
+    /* 삐져나옴 방지 및 상단 박스와 가로 폭 완벽 일치 */
     .date-input, .select-input {
       background: #0d0f1e;
       border: 1px solid rgba(245, 208, 97, 0.4);
       color: #fff;
-      padding: 9px 10px;
+      padding: 8px 10px;
       border-radius: 8px;
       font-family: inherit;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       outline: none;
       width: 100%;
       max-width: 100%;
+      box-sizing: border-box;
     }
 
     .horoscope-result-card {
       display: none;
       background: rgba(20, 23, 46, 0.85);
       border: 1.5px solid var(--gold-primary);
-      border-radius: 14px;
-      padding: 14px 16px;
+      border-radius: 12px;
+      padding: 12px 14px;
       width: 100%;
       text-align: left;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
       animation: fadeIn 0.4s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .zodiac-badge {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       border-bottom: 1px solid rgba(245, 208, 97, 0.2);
-      padding-bottom: 8px;
-      margin-bottom: 10px;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .zodiac-icon {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
 
     .zodiac-info h3 {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       color: #fff;
     }
 
     .zodiac-info p {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--gold-primary);
     }
 
     .lucky-chips {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: wrap;
-      margin-top: 10px;
-      padding-top: 8px;
+      margin-top: 8px;
+      padding-top: 6px;
       border-top: 1px dashed rgba(245, 208, 97, 0.2);
     }
 
     .lucky-chip {
       background: rgba(245, 208, 97, 0.1);
       border: 1px solid rgba(245, 208, 97, 0.3);
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--gold-light);
     }
   </style>
@@ -471,7 +472,7 @@
       <button class="btn-start" id="mainStartBtn" type="button">화면을 터치하여 카드 고르기</button>
     </div>
 
-    <!-- 2단계: 10장 그리드 타로 선택 화면 -->
+    <!-- 2단계: 8장 그리드 타로 선택 화면 -->
     <div class="screen" id="screenSpread">
       <div class="deck-instruction">마음에 드는 카드를 한 장 선택하세요</div>
       <div class="grid-deck-wrapper" id="deckWrapper"></div>
@@ -482,7 +483,7 @@
       <div class="result-card-container">
         <div class="result-card-3d" id="resultCard3D">
           <div class="card-face back">
-            <div style="font-size:1.5rem; color:var(--gold-primary);">✦</div>
+            <div style="font-size:1.3rem; color:var(--gold-primary);">✦</div>
           </div>
           <div class="card-face front" id="cardFrontFace">
             <div class="card-number" id="resCardNum">THE FOOL</div>
@@ -514,7 +515,7 @@
       </div>
 
       <div class="input-card">
-        <p style="font-size:0.82rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
+        <p style="font-size:0.8rem; color:var(--gold-light);">생일 또는 별자리를 선택해 주세요</p>
         <div class="input-row">
           <select class="select-input" id="zodiacSelect">
             <option value="" disabled selected>별자리로 직접 선택</option>
@@ -701,13 +702,13 @@
       playCardShuffleSound();
     }
 
-    /* 정확히 10장의 카드 그리드 배열 생성 */
+    /* 정확히 8장의 카드 그리드 배열 생성 (4열 x 2행) */
     function renderGridDeck() {
       const wrapper = document.getElementById('deckWrapper');
       wrapper.innerHTML = '';
       
       const shuffledIndices = Array.from({ length: 22 }, (_, i) => i).sort(() => Math.random() - 0.5);
-      const totalCards = 10;
+      const totalCards = 8; // 요청하신 대로 8장 배치
 
       for (let i = 0; i < totalCards; i++) {
         const cardEl = document.createElement('div');
